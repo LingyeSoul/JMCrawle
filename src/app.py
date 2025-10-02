@@ -386,18 +386,38 @@ class JMComicApp:
                     [
                         ft.Text("JMCrawler 是一个基于 JMComic-Crawler-Python 设计的图形化漫画下载工具。", size=14),
                         ft.Text("版本:V1.0.0", size=14),
-                        ft.Text("作者: LingyeSoul", size=14),
+                        ft.Text("作者: 泠夜Soul", size=14),
                         ft.Text("GitHub 仓库:", size=14),
                         ft.TextButton(
                             "https://github.com/LingyeSoul/JMCrawler",
                             on_click=lambda _: self.page.launch_url("https://github.com/LingyeSoul/JMCrawler")
                         ),
+                        ft.Divider(),
+                        ft.Text("使用责任:", size=14, weight=ft.FontWeight.BOLD),
+                        ft.Text("1. 用户完全理解并同意，使用本软件下载的任何内容均受版权法保护。", size=12),
+                        ft.Text("2. 用户不得将通过本软件获取的内容用于商业目的或非法传播。", size=12),
+                        ft.Text("3. 用户应自行承担使用本软件的所有风险和责任。", size=12),
+                        ft.Text("4. 本软件开发者不对用户使用本软件产生的任何后果负责。", size=12),
+                        ft.Text("版权声明:", size=14, weight=ft.FontWeight.BOLD),
+                        ft.Text("1. 本软件不拥有任何漫画内容的版权。", size=12),
+                        ft.Text("2. 所有漫画内容的版权归其原始权利人所有。", size=12),
+                        ft.Text("3. 本软件仅提供技术手段，不参与任何内容的创作或分发。", size=12),
+                        ft.Text("法律合规:", size=14, weight=ft.FontWeight.BOLD),
+                        ft.Text("1. 用户在使用本软件时必须遵守所在国家/地区的所有适用法律法规。", size=12),
+                        ft.Text("2. 严禁使用本软件下载或传播任何侵犯第三方权益的内容。", size=12),
+                        ft.Text("3. 如用户违反相关法律法规，应自行承担全部法律责任。", size=12),
+                        ft.Text("技术限制:", size=14, weight=ft.FontWeight.BOLD),
+                        ft.Text("1. 本软件的功能可能因网站策略变更而失效。", size=12),
+                        ft.Text("2. 开发者不保证软件的持续可用性或功能完整性。", size=12),
+                        ft.Text("3. 用户理解并接受使用本软件可能面临的技术风险。", size=12),
                     ],
                     width=400,
                     spacing=10,
                     tight=True,  # 设置 tight=True 使列高度适应内容
+                    scroll=ft.ScrollMode.AUTO,  # 添加滚动功能以适应更多内容
                 ),
                 width=400,  # 设置容器宽度
+                height=300,  # 设置容器高度
             ),
             actions=[
                 ft.TextButton("确定", on_click=lambda e: self.page.close(about_dialog))
