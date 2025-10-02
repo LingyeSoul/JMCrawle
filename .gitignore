@@ -162,6 +162,8 @@ cython_debug/
 # Flet
 storage/
 
-
+download/
 config.json
-options.yml
+option.yml
+Nuitkadist
+.flet

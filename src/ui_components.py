@@ -26,7 +26,6 @@ class UIComponents:
         # ID输入框
         self.id_input = ft.TextField(
             label="请输入本子ID或URL",
-            hint_text="例如: 422866 或 https://jmcomic.me/album/422866",
             width=500,
             border_radius=8,
         )
@@ -106,7 +105,7 @@ class UIComponents:
             scroll=ft.ScrollMode.AUTO,  # 添加滚动功能
         )
     
-    def create_appbar(self, config_manager, open_settings_handler, switch_theme_handler, minimize_window_handler, exit_app_handler):
+    def create_appbar(self, config_manager, open_settings_handler, switch_theme_handler, minimize_window_handler, exit_app_handler, show_about_handler):
         """创建应用栏"""
         # 设置主题图标
         if config_manager.get("theme") == "light":
@@ -119,6 +118,7 @@ class UIComponents:
             center_title=False,
             bgcolor=ft.Colors.SURFACE_CONTAINER_HIGHEST,
             actions=[
+                ft.IconButton(icon=ft.Icons.INFO, on_click=show_about_handler, icon_size=30),
                 ft.IconButton(icon=ft.Icons.SETTINGS, on_click=open_settings_handler, icon_size=30),
                 ft.IconButton(icon=theme_icon, on_click=switch_theme_handler, icon_size=30),
                 ft.IconButton(ft.Icons.MINIMIZE, on_click=minimize_window_handler, icon_size=30),
@@ -137,7 +137,7 @@ class UIComponents:
                             [
                                 ft.Row([self.id_input,
                                 ft.Container(
-                                    content=ft.Row([self.download_button, self.parse_button], spacing=10),
+                                    content=ft.Row([self.parse_button,self.download_button ], spacing=10),
                                     alignment=ft.alignment.bottom_center,
                                     padding=15,
                                 ),]),
@@ -196,7 +196,7 @@ class UIComponents:
                 ),
                 ft.Container(
                     content=album_info_card,
-                    height=220,
+                    height=300,
                 ),
                 ft.Container(
                     content=logs_card,

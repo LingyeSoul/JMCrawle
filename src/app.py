@@ -8,6 +8,7 @@ from jm_manager import JMComicManager
 from ui_components import UIComponents
 from settings_dialog import create_settings_dialog
 import asyncio
+import os
 
 
 class JMComicApp:
@@ -45,11 +46,11 @@ class JMComicApp:
         self.page.title = "JMCrawler"
         self.page.theme = ft.Theme(color_scheme_seed=ft.Colors.BLUE,font_family="Microsoft YaHei")
         self.page.dark_theme=ft.Theme(color_scheme_seed=ft.Colors.BLUE,font_family="Microsoft YaHei")
-        self.page.window.width =1024
-        self.page.window.height = 720
+        self.page.window.width = 1024
+        self.page.window.height = 800
         self.page.window.resizable = False
-        self.page.window.min_height=720
-        self.page.window.min_width=1024
+        self.page.window.min_height = 800
+        self.page.window.min_width = 1024
         self.page.window.maximizable = False
         self.page.window.title_bar_hidden = True
 
@@ -69,7 +70,8 @@ class JMComicApp:
             self.open_settings,
             self.switch_theme,
             self.minimize_window,
-            self.exit_app
+            self.exit_app,
+            self.show_about
         )
         
         # 创建主布局
@@ -302,24 +304,105 @@ class JMComicApp:
         while len(self.ui.album_info.controls) > 2:
             self.ui.album_info.controls.pop()
         
-        # 添加具体信息
-        info_content = ft.Column(
+        # 创建封面保存路径 (在 download/cache 目录下)
+        cache_dir = os.path.join(os.getcwd(), "download", "cache")
+        os.makedirs(cache_dir, exist_ok=True)
+        cover_path = os.path.join(cache_dir, f"{album.album_id}_cover.jpg")
+        
+        # 先创建一个占位的封面显示区域
+        cover_container = ft.Container(
+            content=ft.Container(
+                content=ft.Text("加载中...", size=12),
+                width=120,
+                height=160,
+                alignment=ft.alignment.center,
+                border=ft.border.all(1, ft.Colors.GREY_400),
+            ),
+            margin=ft.margin.only(right=15),
+        )
+        
+        # 创建信息行（不含封面）
+        info_column = ft.Column(
             [
                 ft.Text(f"标题: {album.name}", size=16),
                 ft.Text(f"作者: {album.author}", size=16),
                 ft.Text(f"标签: {', '.join(album.tags) if isinstance(album.tags, list) else ', '.join(album.tags.split(',')) if album.tags else '无'}", size=16),
                 ft.Text(f"章节: {len(album)} 话", size=16),
             ],
-            spacing=5
+            spacing=5,
+            expand=True,
         )
         
-        self.ui.album_info.controls.append(info_content)
+        info_row = ft.Row(
+            [
+                # 封面显示部分（占位符）
+                cover_container,
+                
+                # 信息部分
+                info_column
+            ],
+            alignment=ft.MainAxisAlignment.START,
+            vertical_alignment=ft.CrossAxisAlignment.START,
+        )
+        
+        self.ui.album_info.controls.append(info_row)
         
         # 添加简介信息（如果存在）
         if hasattr(album, 'description') and album.description:
             self.ui.album_info.controls.append(ft.Divider())
             self.ui.album_info.controls.append(ft.Text("简介:", size=16, weight=ft.FontWeight.BOLD))
-            self.ui.album_info.controls.append(ft.Text(album.description, size=14))
+            
+            # 限制简介文本的最大高度并添加滚动功能
+            description_container = ft.Container(
+                content=ft.Column(
+                    [
+                        ft.Text(album.description, size=14),
+                    ],
+                    scroll=ft.ScrollMode.AUTO,
+                ),
+                height=80,
+            )
+            self.ui.album_info.controls.append(description_container)
         
         self.ui.album_info.visible = True
         self.page.update()
+        
+        cover_container.content = ft.Image(
+                src=self.jm_manager.get_album_cover(album.album_id),
+                width=120,
+                height=160,
+                fit=ft.ImageFit.CONTAIN,
+            )
+        
+        self.page.update()
+
+    def show_about(self, e):
+        """显示关于对话框"""
+        about_dialog = ft.AlertDialog(
+            modal=True,
+            title=ft.Text("关于 JMCrawler"),
+            content=ft.Container(
+                content=ft.Column(
+                    [
+                        ft.Text("JMCrawler 是一个基于 JMComic-Crawler-Python 设计的图形化漫画下载工具。", size=14),
+                        ft.Text("版本:V1.0.0", size=14),
+                        ft.Text("作者: LingyeSoul", size=14),
+                        ft.Text("GitHub 仓库:", size=14),
+                        ft.TextButton(
+                            "https://github.com/LingyeSoul/JMCrawler",
+                            on_click=lambda _: self.page.launch_url("https://github.com/LingyeSoul/JMCrawler")
+                        ),
+                    ],
+                    width=400,
+                    spacing=10,
+                    tight=True,  # 设置 tight=True 使列高度适应内容
+                ),
+                width=400,  # 设置容器宽度
+            ),
+            actions=[
+                ft.TextButton("确定", on_click=lambda e: self.page.close(about_dialog))
+            ],
+            actions_alignment=ft.MainAxisAlignment.END,
+        )
+        
+        self.page.open(about_dialog)

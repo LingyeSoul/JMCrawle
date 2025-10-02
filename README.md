@@ -4,7 +4,7 @@
 
 ## 简介
 
-JMComic Crawler GUI 是一个用于下载 JMComic（禁漫天堂）漫画的图形界面应用程序。它基于 [JMComic-Python](https://github.com/hect0x7/JMComic-Crawler-Python) 库开发，提供了一个简单易用的界面来下载漫画，无需编写任何代码。
+JMCrawler是一个用于下载 JMComic漫画的图形界面应用程序。它基于 [JMComic-Crawler-Python](https://github.com/hect0x7/JMComic-Crawler-Python) 库开发，提供了一个简单易用的界面来下载漫画，无需编写任何代码。
 
 ![GUI预览](https://raw.githubusercontent.com/hect0x7/JMComic-Crawler-Python/master/assets/gui_preview.png)
 
@@ -16,19 +16,21 @@ JMComic Crawler GUI 是一个用于下载 JMComic（禁漫天堂）漫画的图�
 - 🔄 异步下载，不阻塞界面
 - 📂 自动保存漫画到本地
 - 🌐 支持跨平台（Windows, macOS, Linux）
+- 📖 漫画详情显示（包括封面）
+- ⚙️ 可自定义配置选项
 
 ## 安装
 
 ### 环境要求
 
-- Python >= 3.7 (推荐 3.9+)
+- Python >= 3.9 
 - Windows, macOS 或 Linux 操作系统
 
 ### 安装步骤
 
 1. 克隆或下载本项目:
 ```bash
-git clone https://github.com/your-username/JMComic-Crawler-GUI.git
+git clone https://github.com/LingyeSoul/JMComic-Crawler-GUI.git
 cd JMComic-Crawler-GUI
 ```
 
@@ -63,26 +65,9 @@ python src/main.py
 ### 下载漫画
 
 1. 在输入框中输入漫画的ID或完整URL
-   - 示例ID: `422866`
-   - 示例URL: `https://jmcomic.me/album/422866`
-
 2. 点击"下载"按钮开始下载
-
 3. 在日志区域查看下载进度和结果
 
-## 配置选项
-
-JMComic 支持丰富的配置选项，可以通过创建 `option.yml` 文件来自定义下载行为：
-
-```yaml
-download:
-  image:
-    suffix: .png
-client:
-  impl: api
-```
-
-更多配置选项请参考 [JMComic官方文档](https://jmcomic.readthedocs.io/zh-cn/latest/)
 
 ## 注意事项
 
@@ -90,11 +75,42 @@ client:
 2. 建议在下载大量漫画时添加适当的延迟
 3. 请遵守当地法律法规，仅用于个人学习和研究目的
 
+## 免责声明
+
+### 重要提示
+本项目仅供技术研究和学习使用，禁止用于任何商业用途。用户在使用本软件时必须遵守以下条款：
+
+### 使用责任
+1. 用户完全理解并同意，使用本软件下载的任何内容均受版权法保护。
+2. 用户不得将通过本软件获取的内容用于商业目的或非法传播。
+3. 用户应自行承担使用本软件的所有风险和责任。
+4. 本软件开发者不对用户使用本软件产生的任何后果负责。
+
+### 版权声明
+1. 本软件不拥有任何漫画内容的版权。
+2. 所有漫画内容的版权归其原始权利人所有。
+3. 本软件仅提供技术手段，不参与任何内容的创作或分发。
+
+### 法律合规
+1. 用户在使用本软件时必须遵守所在国家/地区的所有适用法律法规。
+2. 严禁使用本软件下载或传播任何侵犯第三方权益的内容。
+3. 如用户违反相关法律法规，应自行承担全部法律责任。
+
+### 技术限制
+1. 本软件的功能可能因网站策略变更而失效。
+2. 开发者不保证软件的持续可用性或功能完整性。
+3. 用户理解并接受使用本软件可能面临的技术风险。
+
+### 知识产权
+1. 本软件基于 GPL-3.0 许可证发布，但不包括第三方库。
+2. 本软件使用了 [JMComic-Crawler-Python](https://github.com/hect0x7/JMComic-Crawler-Python) 库，其版权属于原作者。
+3. 本软件使用了 [Flet](https://flet.dev/) 框架，其版权属于 Flet 团队。
+
 ## 许可证
 
-本项目基于 MIT 许可证发布，详情请参阅 [LICENSE](LICENSE) 文件。
+本项目基于 GPL-3.0 许可证发布，详情请参阅 [LICENSE](LICENSE) 文件。
 
 ## 致谢
 
-- [JMComic-Python](https://github.com/hect0x7/JMComic-Crawler-Python) - 核心爬虫库
+- [JMComic-Crawler-Python](https://github.com/hect0x7/JMComic-Crawler-Python) - 核心爬虫库
 - [Flet](https://flet.dev/) - GUI框架

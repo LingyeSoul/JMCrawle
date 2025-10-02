@@ -4,6 +4,7 @@ from option import OptionManager
 
 try:
     import jmcomic
+    from jmcomic import  JmModuleConfig
     JMCOMIC_AVAILABLE = True
 except ImportError:
     JMCOMIC_AVAILABLE = False
@@ -40,3 +41,7 @@ class JMComicManager:
         if not self.available or not self.option:
             raise Exception("JMComic库不可用")
         jmcomic.download_album(album_id, self.option)
+    
+    def get_album_cover(self, album_id):
+        """下载漫画封面"""
+        return f'https://{JmModuleConfig.DOMAIN_IMAGE_LIST[0]}/media/albums/{album_id}.jpg'

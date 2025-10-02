@@ -3,23 +3,14 @@ dir_rule:
   rule: JM{Aid}-{Atitle}/{Pid}-{Ptitle}
 plugins:
   before_album:
-    - plugin: download_cover
-      kwargs:
-        size: '_3x4'
-        dir_rule:
-          base_dir: E:\WorkProject\JMComic-Crawler-GUI\download
-          rule: '{Atitle}/{Aid}_cover.jpg'
-
+  - plugin: download_cover
+    kwargs:
+      size: _3x4
+      dir_rule:
+        base_dir: E:\WorkProject\JMComic-Crawler-GUI\download
+        rule: 'JM{Aid}-{Atitle}/cover.jpg'
   after_album:
-    - plugin: img2pdf
-      kwargs:
-        pdf_dir: E:\WorkProject\JMComic-Crawler-GUI\download
-        filename_rule: JM{Aid}-{Atitle}
-    - plugin: long_img
-      kwargs:
-        pdf_dir: E:\WorkProject\JMComic-Crawler-GUI\download
-        filename_rule: JM{Aid}-{Atitle}
-  before_photo:
-    - plugin: skip_photo_with_few_images
-      kwargs:
-        at_least_image_count: 3
+  - plugin: img2pdf
+    kwargs:
+      pdf_dir: E:\WorkProject\JMComic-Crawler-GUI\download
+      filename_rule: JM{Aid}-{Atitle}

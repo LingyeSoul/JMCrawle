@@ -49,7 +49,7 @@ class OptionManager:
                             "size": "_3x4",
                             "dir_rule": {
                                 "base_dir": download_dir,
-                                "rule": "{Atitle}/{Aid}_cover.jpg"
+                                "rule": "JM{Aid}-{Atitle}/cover.jpg"
                             }
                         }
                     }

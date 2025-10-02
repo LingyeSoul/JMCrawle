@@ -125,7 +125,7 @@ def create_settings_dialog(page: ft.Page, config_manager):
                         "size": "_3x4",
                         "dir_rule": {
                             "base_dir": path_field.value,
-                            "rule": "{Atitle}/{Aid}_cover.jpg"
+                            "rule": "JM{Aid}-{Atitle}/cover.jpg"
                         }
                     }
                 elif plugin_name == "img2pdf":
@@ -185,6 +185,7 @@ def create_settings_dialog(page: ft.Page, config_manager):
                 ),
                 ft.Divider(),
             ] + plugin_controls,
+            tight=True,
             width=500,
             height=600,
             scroll=ft.ScrollMode.AUTO,
