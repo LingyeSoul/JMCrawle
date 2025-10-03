@@ -43,5 +43,4 @@ class JMComicManager:
         jmcomic.download_album(album_id, self.option)
     
     def get_album_cover(self, album_id):
-        """下载漫画封面"""
         return f'https://{JmModuleConfig.DOMAIN_IMAGE_LIST[0]}/media/albums/{album_id}.jpg'
