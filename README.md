@@ -1,4 +1,4 @@
-# JMComic Crawler GUI
+# JMCrawler
 
 一个基于 Flet 框架的 JMComic 爬虫图形界面应用程序。
 
@@ -30,7 +30,7 @@ JMCrawler是一个用于下载 JMComic漫画的图形界面应用程序。它基
 
 1. 克隆或下载本项目:
 ```bash
-git clone https://github.com/LingyeSoul/JMComic-Crawler-GUI.git
+git clone https://github.com/LingyeSoul/JMCrawler.git
 cd JMComic-Crawler-GUI
 ```
 
