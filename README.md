@@ -6,7 +6,7 @@
 
 JMCrawler是一个用于下载 JMComic漫画的图形界面应用程序。它基于 [JMComic-Crawler-Python](https://github.com/hect0x7/JMComic-Crawler-Python) 库开发，提供了一个简单易用的界面来下载漫画，无需编写任何代码。
 
-![GUI预览](https://raw.githubusercontent.com/hect0x7/JMComic-Crawler-Python/master/assets/gui_preview.png)
+![GUI预览](https://raw.githubusercontent.com/hect0x7/JMComic-Crawler-Python/master/doc/preview.png)
 
 ## 功能特性
 
